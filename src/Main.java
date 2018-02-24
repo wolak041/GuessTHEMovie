@@ -2,19 +2,19 @@ public class Main {
 
     public static void main(String[] args) {
 
-        boolean playAgain;
+        boolean startNewGame = true;
+        ChoseMovie choseMovie = new ChoseMovie();
 
-        do {
-            ChoseMovie choseMovie = new ChoseMovie();
+        while(startNewGame) {
 
-            char[] movie = choseMovie.randomChoseMovie();
-            char[] dashMovie = choseMovie.dashRandomChoseMovie(movie);
+            String movie = choseMovie.randomChoseMovie();
+            String dashMovie = choseMovie.dashRandomChoseMovie(movie);
 
             Game game = new Game(movie, dashMovie);
 
-            playAgain = game.playAgain();
+            startNewGame = game.playAgain();
 
-        } while(playAgain);
+        }
 
     }
 }

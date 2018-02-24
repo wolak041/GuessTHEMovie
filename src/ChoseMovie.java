@@ -25,21 +25,14 @@ public class ChoseMovie {
 
     }
 
-    public char[] randomChoseMovie() {
-        return listOfMovies.get((int) (Math.random() * listOfMovies.size())).toCharArray();
+    public String randomChoseMovie() {
+        return listOfMovies.get((int) (Math.random() * listOfMovies.size()));
 
     }
 
-    public char[] dashRandomChoseMovie(char[] RandomChoseMovie) {
-        char[] dashChosenMovie = RandomChoseMovie.clone();
+    public String dashRandomChoseMovie(String randomChoseMovie) {
 
-        for (int i = 0; i < RandomChoseMovie.length; i++) {
-            if (Character.toString(dashChosenMovie[i]).matches("[a-zA-Z0-9]")) {
-                dashChosenMovie[i] = '-';
-            }
-        }
-
-        return dashChosenMovie;
+        return randomChoseMovie.replaceAll("[a-zA-Z0-9]", "-");
 
     }
 

@@ -1,17 +1,16 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Game {
 
     private Scanner readUserInput;
-    private char[] movie;
-    private char[] dashMovie;
+    private String movie;
+    private String dashMovie;
     private ArrayList<Character> wrongCharacters = new ArrayList<>();
     private int mistakes = 0;
 
-    Game(char[] movie, char[] dashMovie) {
+    Game(String movie, String dashMovie) {
 
         readUserInput = new Scanner(System.in);
         String userChar;
@@ -40,8 +39,8 @@ public class Game {
 
         } while(mistakes < 5);
 
-        if(mistakes != 5) System.out.println("You win! The movie is: " + new String(this.movie));
-        else System.out.println("You lose! You have made 5 mistakes. The movie is: " + new String(this.movie));
+        if(mistakes != 5) System.out.println("You win! The movie is: " + this.movie);
+        else System.out.println("You lose! You have made 5 mistakes. The movie is: " + this.movie);
 
     }
 
@@ -49,14 +48,17 @@ public class Game {
 
         int charOccurrence = 0;
 
-        for (int i = 0; i < movie.length; i++) {
+        char[] charDashMovie = dashMovie.toCharArray();
 
-            if (movie[i] == userChar) {
-                dashMovie[i] = userChar;
+        for (int i = 0; i < charDashMovie.length; i++) {
+            if (movie.charAt(i) == userChar) {
+                charDashMovie[i] = userChar;
                 charOccurrence++;
             }
 
         }
+
+        dashMovie = String.valueOf(charDashMovie);
 
         addWrongCharacters(charOccurrence, userChar);
 
@@ -71,35 +73,33 @@ public class Game {
     }
 
     private boolean containsDash() {
-        return Arrays.toString(dashMovie).contains("-");
+        return dashMovie.contains("-");
 
     }
 
     public boolean playAgain() {
 
-        readUserInput = new Scanner(System.in);
-        int userInput;
-        boolean playAgain = false;
+        while(true) {
+            readUserInput = new Scanner(System.in);
 
-        System.out.println("Do you want to play again?");
-        System.out.println("1. Yes");
-        System.out.println("2. No");
+            try {
+                System.out.println("Do you want to play again?");
+                System.out.println("1. Yes");
+                System.out.println("2. No");
 
-        try {
-            userInput = readUserInput.nextInt();
-            if (userInput == 1) playAgain = true;
-            else if (userInput == 2) playAgain = false;
-            else {
+                int userInput = readUserInput.nextInt();
+
+                if (userInput == 1) return true;
+                if (userInput == 2) return false;
+
                 System.out.println("Type 1 to play again or 2 to exit.");
-                playAgain();
+
+            } catch(InputMismatchException e) {
+                System.out.println("Type 1 to play again or 2 to exit.");
+
             }
 
-        } catch (InputMismatchException e) {
-            System.out.println("Type 1 to play again or 2 to exit.");
-            playAgain();
         }
-
-        return playAgain;
 
     }
 
