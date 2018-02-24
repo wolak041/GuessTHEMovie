@@ -47,7 +47,6 @@ public class Game {
     private void compareAndChange(char userChar){
 
         int charOccurrence = 0;
-
         char[] charDashMovie = dashMovie.toCharArray();
 
         for (int i = 0; i < charDashMovie.length; i++) {

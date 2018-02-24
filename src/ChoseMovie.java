@@ -31,7 +31,6 @@ public class ChoseMovie {
     }
 
     public String dashRandomChoseMovie(String randomChoseMovie) {
-
         return randomChoseMovie.replaceAll("[a-zA-Z0-9]", "-");
 
     }
