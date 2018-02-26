@@ -13,11 +13,11 @@ public class Game {
     Game(String movie, String dashMovie) {
 
         readUserInput = new Scanner(System.in);
-        String userChar;
+        String userInput;
         this.movie = movie;
         this.dashMovie = dashMovie;
 
-        System.out.println("Guess title of the movie by typing a letter or a number.");
+        System.out.println("Guess title of the movie. You can type single letters and numbers or whole sentences");
         System.out.println("You can make 5 mistakes.");
 
         do {
@@ -27,13 +27,12 @@ public class Game {
             System.out.println("You have made (" + mistakes + "/5) mistakes");
             System.out.println("Wrong characters: " + wrongCharacters);
 
-            userChar = readUserInput.next();
+            userInput = readUserInput.nextLine();
 
-            if (userChar.matches("[a-zA-Z0-9]")) {
-                char singleChar = Character.toLowerCase(userChar.charAt(0));
-                compareAndChange(singleChar);
+            if (userInput.matches("[a-zA-Z0-9\\s]*")) {
+                compareAndChange(userInput.toLowerCase());
             }
-            else System.out.println("It's not a single letter or digit. Try again.");
+            else System.out.println("Only letters and numbers! Try again.");
 
             if (!containsDash()) break;
 
@@ -44,28 +43,38 @@ public class Game {
 
     }
 
-    private void compareAndChange(char userChar){
+    private void compareAndChange(String userInput){
 
-        int charOccurrence = 0;
-        char[] charDashMovie = dashMovie.toCharArray();
+        int charOccurrence;
+        char[] charArrayUserInput = userInput.toCharArray();
+        char[] charArrayDashMovie = dashMovie.toCharArray();
 
-        for (int i = 0; i < charDashMovie.length; i++) {
-            if (movie.charAt(i) == userChar) {
-                charDashMovie[i] = userChar;
-                charOccurrence++;
+        for (char charUserInput : charArrayUserInput) {
+
+            charOccurrence = 0;
+
+            for (int y = 0; y < charArrayDashMovie.length; y++) {
+
+                if (movie.charAt(y) == charUserInput) {
+                    charArrayDashMovie[y] = charUserInput;
+                    charOccurrence++;
+
+                }
+
             }
+
+            addWrongCharacters(charOccurrence, charUserInput);
+            if (mistakes >= 5) break;
 
         }
 
-        dashMovie = String.valueOf(charDashMovie);
-
-        addWrongCharacters(charOccurrence, userChar);
+        dashMovie = String.valueOf(charArrayDashMovie);
 
     }
 
-    private void addWrongCharacters(int charOccurrence, char userChar) {
-        if (charOccurrence == 0 && !wrongCharacters.contains(userChar)) {
-            wrongCharacters.add(userChar);
+    private void addWrongCharacters(int charOccurrence, char charUserInput) {
+        if (charOccurrence == 0 && !wrongCharacters.contains(charUserInput)) {
+            wrongCharacters.add(charUserInput);
             mistakes++;
         }
 
