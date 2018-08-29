@@ -2,12 +2,12 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Game {
+class Game {
 
     private Scanner readUserInput;
-    private String movie;
+    private final String movie;
     private String dashMovie;
-    private ArrayList<Character> wrongCharacters = new ArrayList<>();
+    private final ArrayList<Character> wrongCharacters = new ArrayList<>();
     private int mistakes = 0;
 
     Game(String movie, String dashMovie) {
@@ -85,7 +85,7 @@ public class Game {
 
     }
 
-    public boolean playAgain() {
+    boolean playAgain() {
 
         while(true) {
             readUserInput = new Scanner(System.in);

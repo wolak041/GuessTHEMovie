@@ -3,7 +3,7 @@ public class Main {
     public static void main(String[] args) {
 
         boolean startNewGame = true;
-        ChoseMovie choseMovie = new ChoseMovie();
+        final ChoseMovie choseMovie = new ChoseMovie();
 
         while(startNewGame) {
 

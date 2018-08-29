@@ -3,9 +3,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ChoseMovie {
+class ChoseMovie {
 
-    private ArrayList<String> listOfMovies = new ArrayList<>();
+    private final ArrayList<String> listOfMovies = new ArrayList<>();
 
     ChoseMovie() {
 
@@ -25,12 +25,12 @@ public class ChoseMovie {
 
     }
 
-    public String randomChoseMovie() {
+    String randomChoseMovie() {
         return listOfMovies.get((int) (Math.random() * listOfMovies.size()));
 
     }
 
-    public String dashRandomChoseMovie(String randomChoseMovie) {
+    String dashRandomChoseMovie(String randomChoseMovie) {
         return randomChoseMovie.replaceAll("[a-zA-Z0-9]", "-");
 
     }
